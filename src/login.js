@@ -3,6 +3,13 @@ import axios from "https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/esm/axios.
 
 const url = "https://vue3-course-api.hexschool.io/v2"; // 請加入站點
 const path = "testadd";
+const token = document.cookie.replace(
+  /(?:(?:^|.*;\s*)myToken\s*\=\s*([^;]*).*$)|^.*$/,
+  "$1"
+);
+console.log(token);
+
+axios.defaults.headers.common["Authorization"] = token;
 
 createApp({
   data() {
@@ -20,6 +27,7 @@ createApp({
         .then((res) => {
           const { token, expired } = res.data;
           document.cookie = `myToken=${token}; expires= ${new Date(expired)}`;
+          window.location = "./products.html";
         })
         // error
         .catch((error) => {
