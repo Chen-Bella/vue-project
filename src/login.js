@@ -16,11 +16,9 @@ createApp({
   methods: {
     login() {
       axios
-        .post((`${url}/admin/signin`, this.user))
+        .post(`${url}/admin/signin`, this.user)
         .then((res) => {
-          console.log(res);
           const { token, expired } = res.data;
-          console.log(token, expired);
           document.cookie = `myToken=${token}; expires= ${new Date(expired)}`;
         })
         // error
