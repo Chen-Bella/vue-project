@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant-TW">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Week1</title>
-    <link rel="stylesheet" href="./../css/bootstrap.css" />
-    <style>
-      img {
-        object-fit: contain;
-        max-width: 100%;
-      }
-  
-      .primary-image {
-        height: 300px;
-      }
-  
-      .images {
-        height: 150px;
-      }
-    </style>
-    <script src="js/bootstrap.js"></script>
-    <script src="https://unpkg.com/vue@next"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+      <style>
+        img {
+          object-fit: contain;
+          max-width: 100%;
+        }
+    
+        .primary-image {
+          height: 300px;
+        }
+    
+        .images {
+          height: 150px;
+        }
+      </style>
   </head>
   <body>
     <div id="app">
@@ -40,7 +41,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="(item) in products">
+                <tr v-for="(item) in products"  :key="item.id">
                   <td width="150">{{ item.title }}</td>
                   <td width="120">{{ item.origin_price }}</td>
                   <td width="120">{{ item.price }}</td>
@@ -52,7 +53,7 @@
                     <button
                       type="button"
                       class="btn btn-primary"
-                      v-on:click="temp = item"
+                      v-on:click="openProduct(item)"
                     >
                       查看細節
                     </button>
@@ -65,33 +66,33 @@
 
           <div class="col-md-6">
             <h2>單一產品細節</h2>
-            <div v-if="temp.title">
+            <div v-if="tempProduct.title">
               <div class="card mb-3">
                 <img
-                  v-bind:src="temp.imageUrl"
+                  v-bind:src="tempProduct.imageUrl"
                   class="card-img-top primary-image"
                   alt="主圖"
                 />
                 <div class="card-body">
                   <h5 class="card-title">
-                    {{ temp.title }}
+                    {{ tempProduct.title }}
                     <span class="badge bg-primary ms-2"
-                      >{{ temp.category}}</span
+                      >{{ tempProduct.category}}</span
                     >
                   </h5>
-                  <p class="card-text">商品描述：{{ temp.description }}</p>
-                  <p class="card-text">商品內容：{{ temp.content }}</p>
+                  <p class="card-text">商品描述：{{ tempProduct.description }}</p>
+                  <p class="card-text">商品內容：{{ tempProduct.content }}</p>
                   <div class="d-flex">
-                    <p class="card-text me-2">{{ temp.price }}</p>
+                    <p class="card-text me-2">{{ tempProduct.price }}</p>
                     <p class="card-text text-secondary">
-                      <del>{{ temp.origin_price }}</del>
+                      <del>{{ tempProduct.origin_price }}</del>
                     </p>
-                    {{ temp.unit }} / 元
+                    {{ tempProduct.unit }} / 元
                   </div>
                 </div>
               </div>
-              <span v-for="(item) in temp.imagesUrl">
-                <img v-bind:src="item" alt="" class="images m-2">
+              <span v-for="(image, id) in tempProduct.imagesUrl" :key="id">
+                <img  v-if="image" v-bind:src="image" alt="`多圖 ${id+1}`" class="images m-2">
               </span>
           </div>
           <p v-else class="text-secondary">請選擇一個商品查看</p>
