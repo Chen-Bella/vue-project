@@ -30,11 +30,10 @@ createApp({
           this.products = response.data.products;
         })
         .catch((err) => {
-          console.dir(err);
+          // console.dir(err);
         });
     },
     openProduct(item) {
-      console.log(item);
       this.tempProduct = item;
     },
   },
