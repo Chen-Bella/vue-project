@@ -82,7 +82,7 @@ const app = createApp({
         });
     },
     deleteProduct() {
-      console.log("deleteProduct", this.tempProduct.id);
+      // console.log("deleteProduct", this.tempProduct.id);
       axios
         .delete(
           `${this.apiUrl}/api/${this.path}/admin/product/${this.tempProduct.id}`
@@ -118,9 +118,16 @@ const app = createApp({
   },
 });
 
+//新增修改元件
 app.component("product-modal", {
-  props: ["tempProduct"],
+  props: ["tempProduct","updateProduct","isNew"],
   template: "#product-modal-template",
+});
+
+//刪除元件
+app.component("del-product-modal", {
+  props: ["tempProduct","deleteProduct"],
+  template: "#del-product-modal-template",
 });
 
 app.mount("#app");
