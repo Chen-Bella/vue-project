@@ -1,5 +1,3 @@
-import { createApp } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.29/vue.esm-browser.min.js";
-
 Object.keys(VeeValidateRules).forEach((rule) => {
   if (rule !== "default") {
     VeeValidate.defineRule(rule, VeeValidateRules[rule]);
@@ -57,7 +55,7 @@ const productModal = {
   },
 };
 
-const app = createApp({
+const app = Vue.createApp({
   data() {
     return {
       products: [],
